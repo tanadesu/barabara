@@ -14,7 +14,7 @@ type Site = {
 export const site: Site = {
   name: 'バラバラロン', genre: 'PUNK ROCK BAND',
   description: 'パンクロックバンド「バラバラロン」公式サイト。音源、ライブ、お知らせはこちら。',
-  url: '',
+  url: 'https://barabara-five.vercel.app',
   colors: { black: '#101010', paper: '#EEE9DC', red: '#E32626' },
   profile: {
     text: '', location: '', formed: '', members: [],

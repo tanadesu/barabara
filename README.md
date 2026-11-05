@@ -66,4 +66,8 @@ OGP画像をバンド名・配色の変更後に更新するには `npm run og` 
 3. Framework PresetをNext.jsに設定し、Deploy。
 4. 発行されたURLを `src/data/site.ts` の `url` に登録し、再デプロイ。
 
-ビルドは `npm run build`、出力先はNext.jsの既定値。データベース・APIキー・環境変数は不要です。ドメイン設定や一般公開はまだ行っていません。
+ビルドは `npm run build`、出力先はNext.jsの既定値。データベース・APIキー・環境変数は不要です。
+
+公開URL: https://barabara-five.vercel.app
+
+Vercelの `tanadesus-projects/barabara` とGitHubの `tanadesu/barabara` を接続済みです。`main` にプッシュすると本番サイトへ自動デプロイされます。独自ドメインは未設定です。
