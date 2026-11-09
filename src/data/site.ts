@@ -7,6 +7,7 @@ type Site = {
   name: string; genre: string; description: string; url: string;
   colors: { black: string; paper: string; red: string };
   profile: { text: string; location: string; formed: string; members: { name: string; role: string; photo?: Photo }[]; photos: Photo[] };
+  livePhotos: Photo[];
   music: Release[]; shows: Show[]; news: News[]; socials: Link[]; email: string;
 };
 
@@ -22,5 +23,15 @@ export const site: Site = {
       { src: '/images/barabarron-band.jpg', alt: '緑の橋の下に集まるバラバラロンのメンバー4人の集合写真', width: 1567, height: 1044 },
     ],
   },
+  livePhotos: [
+    { src: '/images/live/live-1141.webp', alt: '赤い照明のステージで歌うボーカルと演奏するバンド', width: 1920, height: 1280 },
+    { src: '/images/live/live-0612.webp', alt: 'マイクの前でベースを弾くメンバー', width: 1920, height: 1280 },
+    { src: '/images/live/live-0723.webp', alt: '青い照明の中、片足を上げて歌うボーカル', width: 1280, height: 1920 },
+    { src: '/images/live/live-1138.webp', alt: '紫の照明の中で白いギターを弾くメンバー', width: 1920, height: 1280 },
+    { src: '/images/live/live-1771.webp', alt: '暖かな照明の中でポーズをとる3人', width: 1280, height: 1920 },
+    { src: '/images/live/live-1680.webp', alt: '青白い逆光を背にマイクを握るボーカル', width: 1920, height: 1280 },
+    { src: '/images/live/live-0812.webp', alt: 'オレンジ色の照明の下で体を傾けて歌うボーカル', width: 1920, height: 1280 },
+    { src: '/images/live/live-1731.webp', alt: '紫色の光を反射するライブハウスのミラーボール', width: 1920, height: 1280 },
+  ],
   music: [], shows: [], news: [], socials: [], email: '',
 };

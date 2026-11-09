@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { LiveGallery } from './live-gallery';
 import type { ReactNode } from 'react';
 import { site, type Show } from '@/data/site';
 import { classifyShows, displayDate, safeUrl } from '@/lib/content';
@@ -19,7 +20,7 @@ function ShowPoster({ show }: { show: Show }) {
 }
 export function Live() {
   const { upcoming, past } = classifyShows(site.shows);
-  return <section id="live" className="section live paper" data-reveal><div className="section-heading"><div><SectionLabel number="03" text="LIVE SCHEDULE"/><h2>SEE YOU<br/>IN THE <span className="red-text">PIT.</span></h2></div><span className="live-mark" aria-hidden="true">LIVE<br/>LOUD</span></div>{upcoming.length ? <div className="shows-grid">{upcoming.map(show => <ShowPoster key={show.id} show={show}/>)}</div> : <div className="live-empty"><span className="asterisk" aria-hidden="true">✳</span><div><h3>NO SHOWS ANNOUNCED YET</h3><p>次のライブは、ここで知らせる。</p></div><span className="ticket-end" aria-hidden="true">STAY<br/>TUNED ↗</span></div>}{past.length > 0 && <details className="past-shows"><summary>PAST SHOWS / 終了したライブ（{past.length}）</summary><div className="shows-grid">{past.map(show => <ShowPoster key={show.id} show={show}/>)}</div></details>}</section>;
+  return <section id="live" className="section live paper" data-reveal><div className="section-heading"><div><SectionLabel number="03" text="LIVE SCHEDULE"/><h2>SEE YOU<br/>IN THE <span className="red-text">PIT.</span></h2></div><span className="live-mark" aria-hidden="true">LIVE<br/>LOUD</span></div>{upcoming.length ? <div className="shows-grid">{upcoming.map(show => <ShowPoster key={show.id} show={show}/>)}</div> : <div className="live-empty"><span className="asterisk" aria-hidden="true">✳</span><div><h3>NO SHOWS ANNOUNCED YET</h3><p>次のライブは、ここで知らせる。</p></div><span className="ticket-end" aria-hidden="true">STAY<br/>TUNED ↗</span></div>}{past.length > 0 && <details className="past-shows"><summary>PAST SHOWS / 終了したライブ（{past.length}）</summary><div className="shows-grid">{past.map(show => <ShowPoster key={show.id} show={show}/>)}</div></details>}<LiveGallery photos={site.livePhotos}/></section>;
 }
 export function News() {
   return <section id="news" className="section news" data-reveal><div><SectionLabel number="04" text="NEWS & UPDATES"/><h2>LATEST<br/><span className="red-text">NOISE.</span></h2></div><div className="news-list">{site.news.length ? [...site.news].sort((a,b) => b.date.localeCompare(a.date)).map(news => <article key={news.id}><time dateTime={news.date}>{displayDate(news.date)}</time><h3>{news.title}</h3><p className="body-copy">{news.body}</p><ExternalLink url={news.url}>READ MORE</ExternalLink></article>) : <div className="news-empty"><span className="tiny-label">NOTHING HERE. YET.</span><p>まだ静かだ。<br/>次のノイズを待て。</p><span className="news-plus" aria-hidden="true">+</span></div>}</div></section>;
