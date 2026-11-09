@@ -1,5 +1,7 @@
 import { chromium } from '@playwright/test';
 import assert from 'node:assert/strict';
+import { site } from '../src/data/site.ts';
+import { classifyShows } from '../src/lib/content.ts';
 const browser = await chromium.launch();
 const page = await browser.newPage();
 const errors = [];
@@ -11,7 +13,12 @@ for (const width of [1440, 768, 390, 320]) {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   assert.equal(await page.locator('h1').innerText(), 'バ\nラ\nバ\nラ\nロ\nン');
   assert.equal(await page.locator('#contact').count(), 0);
-  for (const text of ['PROFILE COMING SOON', 'MUSIC', 'COMING SOON', 'NO SHOWS ANNOUNCED YET', 'NOTHING HERE. YET.']) assert.ok(await page.getByText(text, { exact: false }).count());
+  for (const text of ['PROFILE COMING SOON', 'MUSIC', 'COMING SOON', 'NOTHING HERE. YET.']) assert.ok(await page.getByText(text, { exact: false }).count());
+  const { upcoming } = classifyShows(site.shows);
+  if (upcoming.length) {
+    assert.equal(await page.locator('.live-empty').count(), 0);
+    for (const show of upcoming) assert.ok(await page.locator('.show-poster').getByRole('heading', { name: show.title, exact: true }).count());
+  } else assert.ok(await page.getByText('NO SHOWS ANNOUNCED YET').count());
   const dimensions = await page.evaluate(() => ({ width: innerWidth, scroll: document.documentElement.scrollWidth }));
   assert.ok(dimensions.scroll <= dimensions.width, `Overflow at ${width}: ${dimensions.scroll}`);
   if (width <= 560) {

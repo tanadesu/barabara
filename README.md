@@ -24,7 +24,7 @@ http://localhost:3000 を開きます。
 - `artistPhotos`: ABOUTのアーティスト写真。ポートレート4枚の後に集合・オフショットを配置。拡大表示に対応。
 - `livePhotos`: ライブフォト。最初の写真はトップ背景にも使用。配列順にギャラリー表示し、タップすると拡大。写真は縦横比を保ったWebPを `public/images/live/` に配置。
 - `music`: 音源。id、title、date（YYYY-MM-DD）、kind、任意のartwork、配信先links
-- `shows`: ライブ。id、date（YYYY-MM-DD）、title、venue、performers、任意のdoors・ticketUrl
+- `shows`: ライブ。id、date（YYYY-MM-DD）、title、venue、performers、任意のdoors（開場）・start（開演）・prices（labelとamountの配列）・flyer（写真形式）・ticketUrl
 - `news`: ニュース。id、date（YYYY-MM-DD）、title、body、任意のurl
 - `socials`: `{ label, url }` の配列
 - `email`: 出演依頼用メールアドレス

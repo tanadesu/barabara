@@ -1,7 +1,11 @@
 export type Photo = { src: string; alt: string; width: number; height: number };
 export type Link = { label: string; url: string };
 export type Release = { id: string; title: string; date: string; kind: string; artwork?: Photo; links: Link[] };
-export type Show = { id: string; date: string; title: string; venue: string; performers: string[]; doors?: string; ticketUrl?: string };
+export type Show = {
+  id: string; date: string; title: string; venue: string; performers: string[];
+  doors?: string; start?: string; prices?: { label: string; amount: string }[];
+  flyer?: Photo; ticketUrl?: string;
+};
 export type News = { id: string; date: string; title: string; body: string; url?: string };
 type Site = {
   name: string; genre: string; description: string; url: string;
@@ -43,5 +47,21 @@ export const site: Site = {
     { src: '/images/live/live-0812.webp', alt: 'オレンジ色の照明の下で体を傾けて歌うボーカル', width: 1920, height: 1280 },
     { src: '/images/live/live-1731.webp', alt: '紫色の光を反射するライブハウスのミラーボール', width: 1920, height: 1280 },
   ],
-  music: [], shows: [], news: [], socials: [], email: '',
+  music: [],
+  shows: [
+    {
+      id: '2026-12-16-yumenoyouna',
+      date: '2026-12-16',
+      title: 'バラバラロンpre「夢のような」',
+      venue: 'P.O.D.STUDIO',
+      performers: ['バラバラロン', 'HOT DOG LOVE'],
+      doors: '19:00', start: '19:30',
+      prices: [
+        { label: '一般', amount: '¥2,500＋1D' },
+        { label: '学生', amount: '¥1,000＋1D' },
+      ],
+      flyer: { src: '/images/shows/2026-12-16-yumenoyouna.jpg', alt: 'バラバラロンpre「夢のような」2026年12月16日 P.O.D.STUDIO 公演フライヤー', width: 1074, height: 1523 },
+    },
+  ],
+  news: [], socials: [], email: '',
 };

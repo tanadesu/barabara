@@ -16,7 +16,25 @@ export function Music() {
   return <section id="music" className="section music" data-reveal><div className="section-heading"><div><SectionLabel number="02" text="MUSIC"/><h2>MAKE SOME<br/><span className="outline-text">NOISE.</span></h2></div><span className="side-note">音を鳴らせ。<br/>それがすべて。</span></div>{site.music.length ? <div className="release-grid">{[...site.music].sort((a,b) => b.date.localeCompare(a.date)).map(release => <article className="release paper" key={release.id}>{release.artwork ? <Image {...release.artwork} alt={release.artwork.alt} sizes="(max-width: 700px) 90vw, 400px"/> : <div className="record-art" aria-hidden="true"><div className="record"/></div>}<p className="tiny-label">{release.kind} / {displayDate(release.date)}</p><h3>{release.title}</h3><div className="external-links">{release.links.map(link => <ExternalLink key={link.label} url={link.url}>{link.label}</ExternalLink>)}</div></article>)}</div> : <div className="music-empty"><div className="record-sleeve paper"><span className="tape"/><div className="record"><span>{site.name}<small>SIDE A / ???</small></span></div><span className="sleeve-note">PLAY IT LOUD.</span></div><div className="empty-copy"><span className="tiny-label">THE NEXT NOISE IS ON ITS WAY</span><h3>MUSIC<br/>COMING SOON<span className="red-text">.</span></h3><p>音源情報は、ここで。</p><span className="scribble-arrow" aria-hidden="true">↙</span></div></div>}</section>;
 }
 function ShowPoster({ show }: { show: Show }) {
-  return <article className="show-poster paper"><time dateTime={show.date}>{displayDate(show.date)}</time><h3>{show.title}</h3><p>{show.venue}</p>{show.doors && <p>OPEN / {show.doors}</p>}{show.performers.length > 0 && <p>ACT / {show.performers.join(' / ')}</p>}<ExternalLink url={show.ticketUrl}>TICKETS</ExternalLink></article>;
+  const weekday = new Intl.DateTimeFormat('ja-JP', { weekday: 'short', timeZone: 'Asia/Tokyo' }).format(new Date(`${show.date}T12:00:00+09:00`));
+  return <article className={`show-poster paper ${show.flyer ? 'has-flyer' : ''}`}>
+    {show.flyer && <a className="show-flyer" href={show.flyer.src} target="_blank" rel="noopener noreferrer" aria-label={`${show.title}のフライヤーを拡大（新しいタブで開く）`}>
+      <Image {...show.flyer} alt={show.flyer.alt} sizes="(max-width: 700px) 82vw, 420px"/>
+      <span>VIEW FLYER ↗</span>
+    </a>}
+    <div className="show-info">
+      <span className="tiny-label">LIVE INFORMATION</span>
+      <time dateTime={show.date}>{displayDate(show.date)}<small>（{weekday}）</small></time>
+      <h3>{show.title}</h3>
+      <dl className="show-details">
+        <div><dt>VENUE</dt><dd>{show.venue}</dd></div>
+        {(show.doors || show.start) && <div><dt>TIME</dt><dd>{show.doors && <span>OPEN {show.doors}</span>}{show.start && <span>START {show.start}</span>}</dd></div>}
+        {show.performers.length > 0 && <div><dt>ACT</dt><dd>{show.performers.map(name => <span key={name}>{name}</span>)}</dd></div>}
+        {!!show.prices?.length && <div><dt>TICKET</dt><dd>{show.prices.map(price => <span key={price.label}>{price.label} {price.amount}</span>)}</dd></div>}
+      </dl>
+      <ExternalLink url={show.ticketUrl}>TICKETS</ExternalLink>
+    </div>
+  </article>;
 }
 export function Live() {
   const { upcoming, past } = classifyShows(site.shows);
