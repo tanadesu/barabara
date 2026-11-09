@@ -21,6 +21,7 @@ http://localhost:3000 を開きます。
 - `url`: 公開後の完全なURL。設定するとcanonicalとOGPの基準URLに反映
 - `colors`: 黒・紙・赤。変更時には文字と背景のコントラストを確認
 - `profile`: 紹介文、拠点、結成年、メンバー、写真
+- `artistPhotos`: ABOUTのアーティスト写真。ポートレート4枚の後に集合・オフショットを配置。拡大表示に対応。
 - `livePhotos`: ライブフォト。最初の写真はトップ背景にも使用。配列順にギャラリー表示し、タップすると拡大。写真は縦横比を保ったWebPを `public/images/live/` に配置。
 - `music`: 音源。id、title、date（YYYY-MM-DD）、kind、任意のartwork、配信先links
 - `shows`: ライブ。id、date（YYYY-MM-DD）、title、venue、performers、任意のdoors・ticketUrl

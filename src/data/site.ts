@@ -8,6 +8,7 @@ type Site = {
   colors: { black: string; paper: string; red: string };
   profile: { text: string; location: string; formed: string; members: { name: string; role: string; photo?: Photo }[]; photos: Photo[] };
   livePhotos: Photo[];
+  artistPhotos: Photo[];
   music: Release[]; shows: Show[]; news: News[]; socials: Link[]; email: string;
 };
 
@@ -20,9 +21,18 @@ export const site: Site = {
   profile: {
     text: '', location: '', formed: '', members: [],
     photos: [
-      { src: '/images/barabarron-band.jpg', alt: '緑の橋の下に集まるバラバラロンのメンバー4人の集合写真', width: 1567, height: 1044 },
+      { src: '/images/artist/group.webp', alt: '緑の橋の下に集まるバラバラロンのメンバー4人の集合写真', width: 1920, height: 1280 },
     ],
   },
+  artistPhotos: [
+    { src: '/images/artist/portrait-01.webp', alt: '高架下に立つ、グレーのジャケットを着たメンバーのポートレート', width: 1920, height: 1280 },
+    { src: '/images/artist/portrait-02.webp', alt: '高架下に立つ、黒と金のジャケットを着たメンバーのポートレート', width: 1920, height: 1280 },
+    { src: '/images/artist/portrait-03.webp', alt: '高架下に立つ、黒いジャケットを着たメンバーのポートレート', width: 1920, height: 1280 },
+    { src: '/images/artist/portrait-04.webp', alt: '高架下に立つ、グレーのシャツを着たメンバーのポートレート', width: 1920, height: 1280 },
+    { src: '/images/artist/playground.webp', alt: '青と黄色の遊具に集まるバラバラロンの4人', width: 1920, height: 1280 },
+    { src: '/images/artist/street.webp', alt: '高架下で縦一列に並び、カメラをのぞき込む4人', width: 1280, height: 1920 },
+    { src: '/images/artist/offstage.webp', alt: '公園の青い遊具に乗ってカメラに顔を近づけるメンバー', width: 1280, height: 1920 },
+  ],
   livePhotos: [
     { src: '/images/live/live-1141.webp', alt: '赤い照明のステージで歌うボーカルと演奏するバンド', width: 1920, height: 1280 },
     { src: '/images/live/live-0612.webp', alt: 'マイクの前でベースを弾くメンバー', width: 1920, height: 1280 },
