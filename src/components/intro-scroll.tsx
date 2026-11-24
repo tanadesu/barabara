@@ -17,38 +17,27 @@ export function IntroScroll() {
     const lockPage = () => {
       const body = document.body;
       const root = document.documentElement;
-      const scrollY = window.scrollY;
       const scrollbarGap = window.innerWidth - root.clientWidth;
       const previous = {
         rootOverflow: root.style.overflow,
-        position: body.style.position,
-        top: body.style.top,
-        left: body.style.left,
-        right: body.style.right,
-        width: body.style.width,
+        rootOverscroll: root.style.overscrollBehavior,
         overflow: body.style.overflow,
+        overscroll: body.style.overscrollBehavior,
         paddingRight: body.style.paddingRight,
       };
 
       root.style.overflow = 'hidden';
-      body.style.position = 'fixed';
-      body.style.top = `-${scrollY}px`;
-      body.style.left = '0';
-      body.style.right = '0';
-      body.style.width = '100%';
+      root.style.overscrollBehavior = 'none';
       body.style.overflow = 'hidden';
+      body.style.overscrollBehavior = 'none';
       if (scrollbarGap > 0) body.style.paddingRight = `${scrollbarGap}px`;
 
       return () => {
         root.style.overflow = previous.rootOverflow;
-        body.style.position = previous.position;
-        body.style.top = previous.top;
-        body.style.left = previous.left;
-        body.style.right = previous.right;
-        body.style.width = previous.width;
+        root.style.overscrollBehavior = previous.rootOverscroll;
         body.style.overflow = previous.overflow;
+        body.style.overscrollBehavior = previous.overscroll;
         body.style.paddingRight = previous.paddingRight;
-        window.scrollTo(0, scrollY);
       };
     };
 
@@ -69,10 +58,10 @@ export function IntroScroll() {
       const startY = window.scrollY;
       const targetY = Math.max(0, startY + about.getBoundingClientRect().top - 40);
       const startTime = performance.now();
-      const duration = 1050;
+      const duration = 550;
       const animateScroll = (now: number) => {
         const progress = Math.min(1, (now - startTime) / duration);
-        const eased = 1 - Math.pow(1 - progress, 4);
+        const eased = 1 - Math.pow(1 - progress, 3);
         window.scrollTo(0, startY + (targetY - startY) * eased);
         if (progress < 1) {
           frame = requestAnimationFrame(animateScroll);
