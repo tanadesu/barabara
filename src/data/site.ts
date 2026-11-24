@@ -63,5 +63,5 @@ export const site: Site = {
       flyer: { src: '/images/shows/2026-12-16-yumenoyouna.jpg', alt: 'バラバラロンpre「夢のような」2026年12月16日 P.O.D.STUDIO 公演フライヤー', width: 1074, height: 1523 },
     },
   ],
-  news: [], socials: [], email: '',
+  news: [], socials: [], email: 'varavararon@gmail.com',
 };
