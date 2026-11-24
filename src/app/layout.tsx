@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import type { CSSProperties } from 'react';
-import { GoogleTagManager } from '@next/third-parties/google';
+import { GoogleAnalytics, GoogleTagManager } from '@next/third-parties/google';
 import { site } from '@/data/site';
 import { safeUrl } from '@/lib/content';
 import './globals.css';
@@ -17,5 +17,5 @@ export const metadata: Metadata = {
 };
 export const viewport: Viewport = { themeColor: site.colors.black };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="ja" style={{ '--ink': site.colors.black, '--paper': site.colors.paper, '--red': site.colors.red } as CSSProperties}><body><GoogleTagManager gtmId="GTM-PVS8NNZT"/>{children}</body></html>;
+  return <html lang="ja" style={{ '--ink': site.colors.black, '--paper': site.colors.paper, '--red': site.colors.red } as CSSProperties}><body><GoogleTagManager gtmId="GTM-PVS8NNZT"/><GoogleAnalytics gaId="G-4JYLV3CNPH"/>{children}</body></html>;
 }
