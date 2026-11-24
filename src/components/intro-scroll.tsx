@@ -12,6 +12,45 @@ export function IntroScroll() {
     let touchStartScrollY = 0;
     let frame = 0;
     let holdTimer = 0;
+    let unlockPage: (() => void) | null = null;
+
+    const lockPage = () => {
+      const body = document.body;
+      const root = document.documentElement;
+      const scrollY = window.scrollY;
+      const scrollbarGap = window.innerWidth - root.clientWidth;
+      const previous = {
+        rootOverflow: root.style.overflow,
+        position: body.style.position,
+        top: body.style.top,
+        left: body.style.left,
+        right: body.style.right,
+        width: body.style.width,
+        overflow: body.style.overflow,
+        paddingRight: body.style.paddingRight,
+      };
+
+      root.style.overflow = 'hidden';
+      body.style.position = 'fixed';
+      body.style.top = `-${scrollY}px`;
+      body.style.left = '0';
+      body.style.right = '0';
+      body.style.width = '100%';
+      body.style.overflow = 'hidden';
+      if (scrollbarGap > 0) body.style.paddingRight = `${scrollbarGap}px`;
+
+      return () => {
+        root.style.overflow = previous.rootOverflow;
+        body.style.position = previous.position;
+        body.style.top = previous.top;
+        body.style.left = previous.left;
+        body.style.right = previous.right;
+        body.style.width = previous.width;
+        body.style.overflow = previous.overflow;
+        body.style.paddingRight = previous.paddingRight;
+        window.scrollTo(0, scrollY);
+      };
+    };
 
     const removeListeners = () => {
       window.removeEventListener('wheel', onWheel);
@@ -52,10 +91,13 @@ export function IntroScroll() {
       if (!about) return;
       used = true;
       holding = true;
+      unlockPage = lockPage();
       document.body.classList.add('intro-paused');
       holdTimer = window.setTimeout(() => {
         holding = false;
         document.body.classList.remove('intro-paused');
+        unlockPage?.();
+        unlockPage = null;
         animateToAbout(about);
       }, 2000);
     };
@@ -97,6 +139,8 @@ export function IntroScroll() {
         holding = false;
         used = true;
         document.body.classList.remove('intro-paused');
+        unlockPage?.();
+        unlockPage = null;
         removeListeners();
       }
     };
@@ -110,6 +154,8 @@ export function IntroScroll() {
     return () => {
       cancelAnimationFrame(frame);
       window.clearTimeout(holdTimer);
+      unlockPage?.();
+      unlockPage = null;
       document.body.classList.remove('intro-paused');
       document.body.classList.remove('intro-scrolling');
       removeListeners();
