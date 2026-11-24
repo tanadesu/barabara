@@ -47,5 +47,5 @@ export function Contact() {
   const socials = site.socials.filter(link => safeUrl(link.url));
   const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(site.email) ? site.email : '';
   if (!socials.length && !email) return null;
-  return <section id="contact" className="section contact paper" data-reveal><SectionLabel number="05" text="CONTACT / SOCIAL"/><h2 className="heading-ja">お問い合わせ</h2><div className="external-links">{socials.map(link => <ExternalLink key={link.label} url={link.url}>{link.label}</ExternalLink>)}{email && <a href={`mailto:${email}`}>BOOKING / {email} ↗</a>}</div></section>;
+  return <section id="contact" className="section contact paper" data-reveal><SectionLabel number="05" text="CONTACT / SOCIAL"/><h2 className="heading-ja">お問い合わせ</h2><div className="external-links">{socials.map(link => <ExternalLink key={link.label} url={link.url}>{link.label}</ExternalLink>)}{email && <a className="booking-link" href={`mailto:${email}`}><span className="booking-label">BOOKING /</span><span className="booking-email">{email}</span><span className="booking-arrow" aria-hidden="true">↗</span></a>}</div></section>;
 }
