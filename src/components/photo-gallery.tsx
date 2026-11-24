@@ -16,7 +16,7 @@ export function PhotoGallery({ photos, variant = 'live' }: GalleryProps) {
     setSelected(current => (current + step + photos.length) % photos.length);
   }
   return <div className={`live-gallery ${artist ? 'artist-gallery' : ''}`}>
-    <div className="photo-heading"><div><span className="tiny-label">{artist ? 'ARTIST PHOTOGRAPHS' : 'LIVE PHOTOGRAPHS'}</span><h3>{artist ? 'FOUR FACES. ONE NOISE.' : 'LOUDER THAN WORDS.'}</h3></div><span className="tiny-label">写真をタップして拡大 ↗</span></div>
+    <div className="photo-heading"><div><span className="tiny-label">{artist ? 'ARTIST PHOTOGRAPHS' : 'LIVE PHOTOGRAPHS'}</span><h3>{artist ? 'OFFSTAGE. STILL LOUD.' : 'LOUDER THAN WORDS.'}</h3></div><span className="tiny-label">写真をタップして拡大 ↗</span></div>
     <div className="photo-wall">{photos.map((item, index) => <button className="photo-print" key={item.src} type="button" aria-label={`写真${index + 1}を拡大：${item.alt}`} onClick={() => { setSelected(index); dialog.current?.showModal(); }}>
       <Image {...item} alt={item.alt} sizes={artist ? (index === 4 ? '(max-width: 800px) 86vw, 44vw' : '(max-width: 800px) 43vw, 22vw') : '(max-width: 560px) 43vw, (max-width: 900px) 42vw, 28vw'}/>
       <span className="photo-caption"><span>FRAME / {String(index + 1).padStart(2, '0')}</span><span aria-hidden="true">↗</span></span>

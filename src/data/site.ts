@@ -30,7 +30,7 @@ export const site: Site = {
   },
   artistPhotos: [
     { src: '/images/artist/portrait-01.webp', alt: '高架下に立つ、グレーのジャケットを着たメンバーのポートレート', width: 1920, height: 1280 },
-    { src: '/images/artist/portrait-02.webp', alt: '高架下に立つ、黒と金のジャケットを着たメンバーのポートレート', width: 1920, height: 1280 },
+    { src: '/images/artist/playground-group.webp', alt: '公園の青と黄色の遊具に集まる4人の集合写真', width: 1920, height: 1280 },
     { src: '/images/artist/portrait-03.webp', alt: '高架下に立つ、黒いジャケットを着たメンバーのポートレート', width: 1920, height: 1280 },
     { src: '/images/artist/portrait-04.webp', alt: '高架下に立つ、グレーのシャツを着たメンバーのポートレート', width: 1920, height: 1280 },
     { src: '/images/artist/playground.webp', alt: '青と黄色の遊具に集まるバラバラロンの4人', width: 1920, height: 1280 },
