@@ -42,7 +42,6 @@ export const site: Site = {
     { src: '/images/live/live-1778.webp', alt: '暖色の照明に照らされたステージのドラムセット', width: 1920, height: 1280 },
     { src: '/images/live/live-0723.webp', alt: '青い照明の中、片足を上げて歌うボーカル', width: 1280, height: 1920 },
     { src: '/images/live/live-1138.webp', alt: '紫の照明の中で白いギターを弾くメンバー', width: 1920, height: 1280 },
-    { src: '/images/live/live-1771.webp', alt: '暖かな照明の中でポーズをとる3人', width: 1280, height: 1920 },
     { src: '/images/live/live-1680.webp', alt: '青白い逆光を背にマイクを握るボーカル', width: 1920, height: 1280 },
     { src: '/images/live/live-0812.webp', alt: 'オレンジ色の照明の下で体を傾けて歌うボーカル', width: 1920, height: 1280 },
     { src: '/images/live/live-1731.webp', alt: '紫色の光を反射するライブハウスのミラーボール', width: 1920, height: 1280 },
