@@ -24,7 +24,7 @@ export function PhotoGallery({ photos, variant = 'live' }: GalleryProps) {
     <dialog ref={dialog} className="photo-dialog" aria-label={artist ? 'アーティスト写真の拡大表示' : 'ライブ写真の拡大表示'} onClick={event => { if (event.target === event.currentTarget) dialog.current?.close(); }} onKeyDown={event => { if (event.key === 'ArrowLeft') { event.preventDefault(); move(-1); } if (event.key === 'ArrowRight') { event.preventDefault(); move(1); } }}>
       <div className="photo-viewer"><div className="viewer-toolbar"><span aria-live="polite">{label} / {selected + 1} — {photos.length}</span><button type="button" autoFocus onClick={() => dialog.current?.close()} aria-label="拡大表示を閉じる">CLOSE ×</button></div>
         <Image {...photo} alt={photo.alt} sizes="(max-width: 700px) 94vw, 90vw"/>
-        <div className="viewer-controls"><button type="button" onClick={() => move(-1)} aria-label="前の写真">← PREV</button><p>{photo.alt}</p><button type="button" onClick={() => move(1)} aria-label="次の写真">NEXT →</button></div>
+        <div className="viewer-controls"><button type="button" onClick={() => move(-1)} aria-label="前の写真">← PREV</button><button type="button" onClick={() => move(1)} aria-label="次の写真">NEXT →</button></div>
       </div>
     </dialog>
   </div>;
