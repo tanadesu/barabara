@@ -15,7 +15,7 @@ export function About() {
 export function Music() {
   return <section id="music" className="section music" data-reveal><div className="section-heading"><div><SectionLabel number="02" text="MUSIC"/><h2 className="heading-ja">楽曲</h2></div><span className="side-note">音源・配信情報</span></div>{site.music.length ? <div className="release-grid">{[...site.music].sort((a,b) => b.date.localeCompare(a.date)).map(release => <article className="release paper" key={release.id}>{release.artwork ? <Image {...release.artwork} alt={release.artwork.alt} sizes="(max-width: 700px) 90vw, 400px"/> : <div className="record-art" aria-hidden="true"><div className="record"/></div>}<p className="tiny-label">{release.kind} / {displayDate(release.date)}</p><h3>{release.title}</h3><div className="external-links">{release.links.map(link => <ExternalLink key={link.label} url={link.url}>{link.label}</ExternalLink>)}</div></article>)}</div> : <div className="music-empty"><div className="record-sleeve paper"><span className="tape"/><div className="record"><span>{site.name}<small>SIDE A / ???</small></span></div><span className="sleeve-note">PLAY IT LOUD.</span></div><div className="empty-copy"><span className="tiny-label">音源・配信情報</span><h3 className="heading-ja">音源準備中</h3><p>公開が決まり次第、お知らせします。</p><span className="scribble-arrow" aria-hidden="true">↙</span></div></div>}</section>;
 }
-function ShowPoster({ show }: { show: Show }) {
+function ShowPoster({ show, archived = false }: { show: Show; archived?: boolean }) {
   const weekday = new Intl.DateTimeFormat('ja-JP', { weekday: 'short', timeZone: 'Asia/Tokyo' }).format(new Date(`${show.date}T12:00:00+09:00`));
   return <article className={`show-poster paper ${show.flyer ? 'has-flyer' : ''}`}>
     {show.flyer && <a className="show-flyer" href={show.flyer.src} target="_blank" rel="noopener noreferrer" aria-label={`${show.title}のフライヤーを拡大（新しいタブで開く）`}>
@@ -23,7 +23,7 @@ function ShowPoster({ show }: { show: Show }) {
       <span>VIEW FLYER ↗</span>
     </a>}
     <div className="show-info">
-      <span className="tiny-label">LIVE INFORMATION</span>
+      <span className="tiny-label">{archived ? 'LIVE HISTORY' : 'LIVE INFORMATION'}</span>
       <time dateTime={show.date}>{displayDate(show.date)}<small>（{weekday}）</small></time>
       <h3>{show.title}</h3>
       <dl className="show-details">
@@ -37,15 +37,19 @@ function ShowPoster({ show }: { show: Show }) {
   </article>;
 }
 export function Live() {
-  const { upcoming, past } = classifyShows(site.shows);
-  return <section id="live" className="section live paper" data-reveal><div className="section-heading"><div><SectionLabel number="03" text="LIVE SCHEDULE"/><h2 className="heading-ja">ライブ情報</h2></div><span className="live-mark" aria-hidden="true">LIVE<br/>LOUD</span></div>{upcoming.length ? <div className="shows-grid">{upcoming.map(show => <ShowPoster key={show.id} show={show}/>)}</div> : <div className="live-empty"><span className="asterisk" aria-hidden="true">✳</span><div><h3>現在、ライブの予定はありません</h3><p>日程が決まり次第、お知らせします。</p></div><span className="ticket-end" aria-hidden="true">STAY<br/>TUNED ↗</span></div>}{past.length > 0 && <details className="past-shows"><summary>PAST SHOWS / 終了したライブ（{past.length}）</summary><div className="shows-grid">{past.map(show => <ShowPoster key={show.id} show={show}/>)}</div></details>}<PhotoGallery photos={site.livePhotos}/></section>;
+  const { upcoming } = classifyShows(site.shows);
+  return <section id="live" className="section live paper" data-reveal><div className="section-heading"><div><SectionLabel number="03" text="LIVE SCHEDULE"/><h2 className="heading-ja">ライブ情報</h2></div><span className="live-mark" aria-hidden="true">LIVE<br/>LOUD</span></div>{upcoming.length ? <div className="shows-grid">{upcoming.map(show => <ShowPoster key={show.id} show={show}/>)}</div> : <div className="live-empty"><span className="asterisk" aria-hidden="true">✳</span><div><h3>現在、ライブの予定はありません</h3><p>日程が決まり次第、お知らせします。</p></div><span className="ticket-end" aria-hidden="true">STAY<br/>TUNED ↗</span></div>}<PhotoGallery photos={site.livePhotos}/></section>;
+}
+export function History() {
+  const { past } = classifyShows(site.shows);
+  return <section id="history" className="section history" data-reveal><div className="section-heading"><div><SectionLabel number="04" text="LIVE HISTORY"/><h2 className="heading-ja">ライブ履歴</h2></div><span className="side-note">過去の公演記録</span></div>{past.length ? <div className="history-list">{past.map(show => <article className="history-record" key={show.id}><ShowPoster show={show} archived/>{show.details && <p className="history-notes body-copy">{show.details}</p>}</article>)}</div> : <div className="history-empty"><span className="asterisk" aria-hidden="true">✳</span><div><span className="tiny-label">LIVE ARCHIVE / OPEN</span><h3>過去の公演記録は、<br/>これから追加していきます。</h3></div></div>}</section>;
 }
 export function News() {
-  return <section id="news" className="section news" data-reveal><div><SectionLabel number="04" text="NEWS & UPDATES"/><h2 className="heading-ja">お知らせ</h2></div><div className="news-list">{site.news.length ? [...site.news].sort((a,b) => b.date.localeCompare(a.date)).map(news => <article key={news.id}><time dateTime={news.date}>{displayDate(news.date)}</time><h3>{news.title}</h3><p className="body-copy">{news.body}</p><ExternalLink url={news.url}>READ MORE</ExternalLink></article>) : <div className="news-empty"><span className="tiny-label">最新情報</span><p>現在、お知らせはありません。</p><span className="news-plus" aria-hidden="true">+</span></div>}</div></section>;
+  return <section id="news" className="section news" data-reveal><div><SectionLabel number="05" text="NEWS & UPDATES"/><h2 className="heading-ja">お知らせ</h2></div><div className="news-list">{site.news.length ? [...site.news].sort((a,b) => b.date.localeCompare(a.date)).map(news => <article key={news.id}><time dateTime={news.date}>{displayDate(news.date)}</time><h3>{news.title}</h3><p className="body-copy">{news.body}</p><ExternalLink url={news.url}>READ MORE</ExternalLink></article>) : <div className="news-empty"><span className="tiny-label">最新情報</span><p>現在、お知らせはありません。</p><span className="news-plus" aria-hidden="true">+</span></div>}</div></section>;
 }
 export function Contact() {
   const socials = site.socials.filter(link => safeUrl(link.url));
   const email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(site.email) ? site.email : '';
   if (!socials.length && !email) return null;
-  return <section id="contact" className="section contact paper" data-reveal><SectionLabel number="05" text="CONTACT / SOCIAL"/><h2 className="heading-ja">お問い合わせ</h2><div className="external-links">{socials.map(link => <ExternalLink key={link.label} url={link.url}>{link.label}</ExternalLink>)}{email && <a className="booking-link" href={`mailto:${email}`}><span className="booking-label">BOOKING /</span><span className="booking-email">{email}</span><span className="booking-arrow" aria-hidden="true">↗</span></a>}</div></section>;
+  return <section id="contact" className="section contact paper" data-reveal><SectionLabel number="06" text="CONTACT / SOCIAL"/><h2 className="heading-ja">お問い合わせ</h2><div className="external-links">{socials.map(link => <ExternalLink key={link.label} url={link.url}>{link.label}</ExternalLink>)}{email && <a className="booking-link" href={`mailto:${email}`}><span className="booking-label">BOOKING /</span><span className="booking-email">{email}</span><span className="booking-arrow" aria-hidden="true">↗</span></a>}</div></section>;
 }

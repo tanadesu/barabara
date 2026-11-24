@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-const links = [['about','バンド紹介'],['music','楽曲'],['live','ライブ'],['news','お知らせ']];
+const links = [['about','バンド紹介'],['music','楽曲'],['live','ライブ'],['history','ライブ履歴'],['news','お知らせ']];
 export function Navigation({ name, contact }: { name: string; contact: boolean }) {
   const [open, setOpen] = useState(false);
   const allLinks = contact ? [...links, ['contact', 'CONTACT']] : links;

@@ -4,7 +4,7 @@ export type Release = { id: string; title: string; date: string; kind: string; a
 export type Show = {
   id: string; date: string; title: string; venue: string; performers: string[];
   doors?: string; start?: string; prices?: { label: string; amount: string }[];
-  flyer?: Photo; ticketUrl?: string;
+  flyer?: Photo; ticketUrl?: string; details?: string;
 };
 export type News = { id: string; date: string; title: string; body: string; url?: string };
 type Site = {
