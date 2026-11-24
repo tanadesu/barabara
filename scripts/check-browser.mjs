@@ -13,19 +13,19 @@ for (const width of [1440, 768, 390, 320]) {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   assert.equal(await page.locator('h1').innerText(), 'バ\nラ\nバ\nラ\nロ\nン');
   assert.equal(await page.locator('#contact').count(), 0);
-  for (const text of ['PROFILE COMING SOON', 'MUSIC', 'COMING SOON', 'NOTHING HERE. YET.']) assert.ok(await page.getByText(text, { exact: false }).count());
+  for (const text of ['プロフィール準備中', '音源準備中', '現在、お知らせはありません。']) assert.ok(await page.getByText(text, { exact: false }).count());
   const { upcoming } = classifyShows(site.shows);
   if (upcoming.length) {
     assert.equal(await page.locator('.live-empty').count(), 0);
     for (const show of upcoming) assert.ok(await page.locator('.show-poster').getByRole('heading', { name: show.title, exact: true }).count());
-  } else assert.ok(await page.getByText('NO SHOWS ANNOUNCED YET').count());
+  } else assert.ok(await page.getByText('現在、ライブの予定はありません').count());
   const dimensions = await page.evaluate(() => ({ width: innerWidth, scroll: document.documentElement.scrollWidth }));
   assert.ok(dimensions.scroll <= dimensions.width, `Overflow at ${width}: ${dimensions.scroll}`);
   if (width <= 560) {
-    await page.getByRole('button', { name: 'MENU +' }).click();
-    assert.equal(await page.getByRole('button', { name: 'CLOSE −' }).getAttribute('aria-expanded'), 'true');
-    await page.getByRole('navigation').getByRole('link', { name: 'LIVE' }).click();
-    assert.equal(await page.getByRole('button', { name: 'MENU +' }).getAttribute('aria-expanded'), 'false');
+    await page.getByRole('button', { name: 'メニュー +' }).click();
+    assert.equal(await page.getByRole('button', { name: '閉じる −' }).getAttribute('aria-expanded'), 'true');
+    await page.getByRole('navigation').getByRole('link', { name: 'ライブ' }).click();
+    assert.equal(await page.getByRole('button', { name: 'メニュー +' }).getAttribute('aria-expanded'), 'false');
     assert.ok(page.url().endsWith('#live'));
   }
   await page.goto('http://localhost:3000');
