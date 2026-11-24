@@ -18,12 +18,12 @@ type Site = {
 
 // 未登録の項目は空文字・空配列のままで構いません。
 export const site: Site = {
-  name: 'バラバラロン', genre: 'PUNK ROCK BAND',
-  description: 'パンクロックバンド「バラバラロン」公式サイト。音源、ライブ、お知らせはこちら。',
+  name: 'バラバラロン', genre: "ROCK'N'ROLL BAND",
+  description: 'ロックンロールバンド「バラバラロン」の公式サイト。プロフィール、音源、ライブ情報を掲載しています。',
   url: 'https://barabara-five.vercel.app',
   colors: { black: '#101010', paper: '#EEE9DC', red: '#E32626' },
   profile: {
-    text: '', location: '', formed: '', members: [],
+    text: 'ロックンロールを軸に、勢いのあるサウンドを鳴らすバンド。飾らない言葉と真っすぐな演奏で、ライブの熱をそのまま届けます。', location: '', formed: '', members: [],
     photos: [
       { src: '/images/artist/group.webp', alt: '緑の橋の下に集まるバラバラロンのメンバー4人の集合写真', width: 1920, height: 1280 },
     ],
