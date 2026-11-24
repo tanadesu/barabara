@@ -24,7 +24,7 @@ http://localhost:3000 を開きます。
 - `artistPhotos`: ABOUTのアーティスト写真。ポートレート・集合写真・オフショットを配置。拡大表示に対応。
 - `livePhotos`: ライブフォト。最初の写真はトップ背景にも使用。配列順にギャラリー表示し、タップすると拡大。写真は縦横比を保ったWebPを `public/images/live/` に配置。
 - `music`: 音源。id、title、date（YYYY-MM-DD）、kind、任意のartwork、配信先links
-- `shows`: ライブ。id、date（YYYY-MM-DD）、title、venue、performers、任意のdoors（開場）・start（開演）・prices（labelとamountの配列）・flyer（写真形式）・ticketUrl・details（公演後の記録やセットリスト）。終了した公演はライブ履歴に自動表示
+- `shows`: ライブ。id、date（YYYY-MM-DD）、title、venue、performers、任意のdoors（開場）・start（開演）・prices（labelとamountの配列）・flyer（写真形式）・ticketUrl・details（公演後の記録やセットリスト）。終了した公演は専用の `/history` ページに自動表示
 - `news`: ニュース。id、date（YYYY-MM-DD）、title、body、任意のurl
 - `socials`: `{ label, url }` の配列
 - `email`: 出演依頼用メールアドレス
@@ -37,8 +37,10 @@ http://localhost:3000 を開きます。
 
 ## 構成
 
-- `src/app/page.tsx`: トップと全体構成
-- `src/components/sections.tsx`: ABOUT / MUSIC / LIVE / HISTORY / NEWS / CONTACT
+- `src/app/page.tsx`: トップページ
+- `src/app/history/page.tsx`: 過去の公演記録専用ページ（`/history`）
+- `src/components/sections.tsx`: ABOUT / MUSIC / LIVE / HISTORY / NEWS / CONTACT の表示
+- `src/components/site-footer.tsx`: 共通フッター
 - `src/components/navigation.tsx`: スマートフォン用メニュー
 - `src/components/art.tsx`: 独自のタイポグラフィと装飾
 - `src/components/reveal.tsx`: 軽量スクロール演出
